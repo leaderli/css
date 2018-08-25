@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>justify_content</title>
+  <style>
+    #top {
+      width: 100%;
+      float: left;
+    }
+
+    #prompt {
+      width: auto;
+      display: inline;
+      border: 1px solid;
+      border-right: 0px;
+      height: 150px;
+      float: left;
+    }
+
+    #prompt div {
+      /*margin: 5px;*/
+      margin: 5px 40px;
+
+    }
+
+    #prompt div button {
+      width: 100px;
+    }
+
+    #main {
+      width: 600px;
+      display: flex;
+      border: 1px solid;
+      height: 150px;
+      float: left;
+    }
+
+    #main div {
+      width: 70px;
+      height: 70px;
+    }
+
+    .center {
+      justify-content: center;
+    }
+
+    .flex_start {
+      justify-content: flex-start;
+    }
+
+    .flex_end {
+      justify-content: flex-end;
+    }
+
+    .space_around {
+      justify-content: space-around;
+    }
+
+    .space_between {
+      justify-content: space-between;
+    }
+
+    .space_evenly {
+      justify-content: space-evenly;
+    }
+
+  </style>
+  <script src='lib/vue.js'></script>
+</head>
+<body>
+<div id="top">
+  <div id="prompt">
+    <div v-for="item in css">
+      <button @click="click(item)">{{item}}</button>
+    </div>
+  </div>
+  <div id="main" :class="flex_content">
+    <div style='background-color: coral;'></div>
+    <div style='background-color: lightblue;'></div>
+    <div style='background-color: khaki;'></div>
+    <div style='background-color: pink;'></div>
+  </div>
+</div>
+<script>
+  var css = ['flex_start', 'flex_end', 'center', 'space_around', 'space_between', 'space_evenly'];
+
+  var top = new Vue({
+    el: '#top',
+    data: {
+      flex_content: ['center'],
+      css: css
+    },
+    mounted: function () {
+      console.log(this.flex_content);
+      console.log(document.body);
+      console.log(window.screen)
+    },
+    methods: {
+      click: function (item) {
+        this.flex_content = this.flex_content.filter(x => x in css);
+        this.flex_content.push(item);
+      }
+    }
+
+  });
+</script>
+</body>
+</html>
